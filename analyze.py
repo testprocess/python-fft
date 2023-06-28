@@ -5,15 +5,24 @@ import platform
 import numpy as np 
 import math
 
+is_test_fft = False
+
 audio_data = 'record/filename.wav'
 
-data, sampling_rate = librosa.load(audio_data)
-plt.figure(figsize=(12, 4))
+if is_test_fft == False:
+    data, sampling_rate = librosa.load(audio_data)
+    plt.figure(figsize=(12, 4))
 
-if platform.system() == "Darwin":
-    librosa.display.waveshow(data, sr=sampling_rate)
+    if platform.system() == "Darwin":
+        librosa.display.waveshow(data, sr=sampling_rate)
+    else:
+        librosa.display.waveplot(data, sr=sampling_rate)
 else:
-    librosa.display.waveplot(data, sr=sampling_rate)
+    data = np.array([np.sin(i) for i in range(80)])
+    plt.figure()  
+    plt.plot([i for i in range(80)], data)
+    plt.show()
+
 
 
 data_length = len(data) 
