@@ -5,7 +5,7 @@ import platform
 import numpy as np 
 import math
 
-is_test_fft = False
+is_test_fft = True
 
 audio_data = 'record/filename.wav'
 
@@ -18,7 +18,7 @@ if is_test_fft == False:
     else:
         librosa.display.waveplot(data, sr=sampling_rate)
 else:
-    data = np.array([np.sin(i) for i in range(80)])
+    data = np.array([np.sin(i) + np.sin(i * 3) for i in range(80)])
     plt.figure()  
     plt.plot([i for i in range(80)], data)
     plt.show()
